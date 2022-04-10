@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: projeto-ifsp-mysql
+    restart: always
+    ports:
+      - 6603:3306
+    environment:
+      - MYSQL_DATABASE=ecommerce_principal
+      - MYSQL_USER=gerente
+      - MYSQL_PASSWORD=41778912
+      - MYSQL_ROOT_PASSWORD=4dm1n147
+    volumes:
+      - dados-mysql:/var/lib/mysql
+  api:
+    build: .
+    container_name: projeto-ifsp-api
+    ports:
+      - 7777:3333
+    volumes:
+      - .:/api
+      - /api/node_modules
+
+volumes:
+  dados-mysql:
