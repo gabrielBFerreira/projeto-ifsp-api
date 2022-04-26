@@ -6,12 +6,12 @@ services:
     container_name: projeto-ifsp-mysql
     restart: always
     ports:
-      - 6603:3306
+      - ${MYSQL_PORT}:3306
     environment:
-      - MYSQL_DATABASE=ecommerce_principal
-      - MYSQL_USER=gerente
-      - MYSQL_PASSWORD=41778912
-      - MYSQL_ROOT_PASSWORD=4dm1n147
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     volumes:
       - dados-mysql:/var/lib/mysql
   mongo:
@@ -22,16 +22,20 @@ services:
     volumes:
       - dados-mongo:/data/db
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=gerente
-      - MONGO_INITDB_ROOT_PASSWORD=4dm1n147
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
   api:
     build: .
+    depends_on:
+      - mysql
+      - mongo
     container_name: projeto-ifsp-api
     ports:
-      - 7777:3333
+      - ${API_PORT}:3333
     volumes:
       - .:/api
       - /api/node_modules
 
 volumes:
   dados-mysql:
+  dados-mongo:

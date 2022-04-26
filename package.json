@@ -4,7 +4,7 @@
   "description": "API do projeto para pós-graduação no IFSP Itapetininga, 1º sem. 2022",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --poll --respawn src/server.ts",
+    "dev": "cross-env NODE_ENV=dev ts-node-dev --inspect --transpile-only --ignore-watch node_modules --poll --respawn src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,8 +20,10 @@
   "homepage": "https://github.com/gabrielBFerreira/projeto-ifsp-api#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "express": "^4.17.3",
-    "swagger-ui-express": "^4.3.0"
+    "swagger-ui-express": "^4.3.0",
+    "typeorm": "^0.3.6"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
