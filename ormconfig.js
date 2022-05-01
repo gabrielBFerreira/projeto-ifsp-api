@@ -9,9 +9,9 @@ export default [
     database: process.env.MYSQL_DATABASE,
     synchronize: false,
     logging: true,
-    entities: [`${rootDir}/database/entities/**/*{.ts,.js}`],
-    migrations: [`${rootDir}/database/migrations/**/*{.ts,.js}`],
-    subscribers: [`${rootDir}/database/subscribers/**/*{.ts,.js}`],
+    entities: [`${rootDir}/database/entities/*{.ts,.js}`],
+    migrations: [`${rootDir}/database/migrations/*{.ts,.js}`],
+    subscribers: [`${rootDir}/database/subscribers/*{.ts,.js}`],
     cli: {
       entitiesDir: `${rootDir}/database/entities`,
       migrationsDir: `${rootDir}/database/migrations`,
