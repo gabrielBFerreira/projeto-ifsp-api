@@ -1,11 +1,19 @@
-import { createConnection } from 'typeorm';
+import { mongoConnection, mysqlConnection } from './datasource';
 
-import { User } from './entities/User';
-
-createConnection()
+mysqlConnection
+  .initialize()
   .then((cnx) => {
-    console.log(`Conectado com sucesso. Dados: ${cnx}`);
+    console.log(`Conectado com sucesso ao MySQL. Dados: ${cnx}`);
   })
   .catch((err) => {
-    console.log(`Erro ao conectar. Dados: ${err}`);
+    console.log(`Erro ao conectar ao MySQL. Dados: ${err}`);
+  });
+
+mongoConnection
+  .initialize()
+  .then((cnx) => {
+    console.log(`Conectado com sucesso ao MongoDB. Dados: ${cnx}`);
+  })
+  .catch((err) => {
+    console.log(`Erro ao conectar ao MongoDB. Dados: ${err}`);
   });
