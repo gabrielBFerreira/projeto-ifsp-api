@@ -2,18 +2,17 @@ import { Column, Entity, ObjectID, ObjectIdColumn } from 'typeorm';
 
 @Entity('Metadado')
 class Metadata {
-
   @ObjectIdColumn()
   _id: ObjectID;
 
   @Column()
-  nome: String;
+  nome: string;
 
   @Column()
-  descricao: String;
+  descricao: string;
 
   @Column()
-  url: String
+  url: string;
 }
 
 export { Metadata };

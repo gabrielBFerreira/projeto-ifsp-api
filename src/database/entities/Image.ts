@@ -1,13 +1,12 @@
-import { Column, Entity, ObjectID, ObjectIdColumn } from 'typeorm';
+import { Column, Entity } from 'typeorm';
 
 @Entity('imagem')
 class Image {
+  @Column()
+  dados: string;
 
   @Column()
-  dados: String;
-
-  @Column()
-  tipo: String;
+  tipo: string;
 }
 
 export { Image };

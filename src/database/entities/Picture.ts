@@ -1,19 +1,19 @@
 import { Column, Entity, ObjectID, ObjectIdColumn } from 'typeorm';
+
 import { Image } from './Image';
 
 @Entity('Figura')
 class Picture {
-
   @ObjectIdColumn()
   _id: ObjectID;
 
   @Column()
-  nome: String;
+  nome: string;
 
   @Column()
-  descricao: String;
+  descricao: string;
 
-  @Column(type => Image)
+  @Column((type) => Image)
   image: Image;
 
   @Column()
