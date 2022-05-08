@@ -1,4 +1,5 @@
-import { mongoConnection, mysqlConnection } from './datasource';
+import { mongoConnection } from './configs/mongo';
+import { mysqlConnection } from './configs/mysql';
 
 mysqlConnection
   .initialize()
