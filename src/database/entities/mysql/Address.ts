@@ -20,6 +20,9 @@ class Address {
   numero: string;
 
   @Column('varchar', { length: 60 })
+  complemento: string;
+
+  @Column('varchar', { length: 60 })
   bairro: string;
 
   @Column('varchar', { length: 30 })

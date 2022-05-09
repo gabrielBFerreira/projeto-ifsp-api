@@ -1,4 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+
+import { Address } from './Address';
+import { Phone } from './Phone';
 
 @Entity('Usuario')
 class User {
@@ -25,6 +28,12 @@ class User {
 
   @Column()
   tipoConta: number;
+
+  @OneToMany(() => Address, (endereco) => endereco.usuario)
+  enderecos: Address[];
+
+  @OneToMany(() => Phone, (telefone) => telefone.usuario)
+  telefones: Phone[];
 }
 
 export { User };
