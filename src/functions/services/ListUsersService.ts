@@ -2,7 +2,7 @@ import { User } from '../../database/entities/mysql/User';
 import { UsersRepository } from '../../database/repositories/mysql/UsersRepository';
 
 interface IResponse {
-  users: User[];
+  usuarios: User[];
 }
 
 export class ListUsersService {
@@ -10,6 +10,6 @@ export class ListUsersService {
     const usersRepository = new UsersRepository();
 
     const { users } = await usersRepository.listUsers();
-    return { users };
+    return { usuarios: users };
   }
 }

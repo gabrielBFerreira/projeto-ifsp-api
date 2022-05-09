@@ -6,8 +6,8 @@ export class UserController {
   public async index(req: Request, res: Response): Promise<Response> {
     const listUsersService = new ListUsersService();
 
-    const { users } = await listUsersService.run();
+    const { usuarios } = await listUsersService.run();
 
-    return res.json({ users });
+    return res.json({ usuarios });
   }
 }

@@ -11,10 +11,9 @@ class UsersRepository {
   }
 
   async listUsers(): Promise<{ users: User[] }> {
-    const users = await this.repository
-      .createQueryBuilder('u')
-      .select()
-      .getRawMany();
+    const users = await this.repository.find({
+      relations: ['enderecos', 'telefones'],
+    });
 
     return { users };
   }
