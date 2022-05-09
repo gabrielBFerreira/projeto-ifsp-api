@@ -5,6 +5,6 @@ COPY . .
 #RUN npm install --global yarn
 RUN yarn
 
-ENTRYPOINT yarn dev
+CMD ["yarn", "dev"]
 
 EXPOSE 3333
