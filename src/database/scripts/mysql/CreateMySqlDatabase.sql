@@ -55,3 +55,34 @@ CREATE TABLE Produto (
       PRIMARY KEY (id),
       FOREIGN KEY (idCategoria) REFERENCES Categoria(id)
      );
+
+CREATE TABLE FormaPagamento (
+      id int NOT NULL AUTO_INCREMENT,
+      nome varchar(50),
+      marca varchar(25),
+      descricao text,
+      PRIMARY KEY (id)
+     );
+
+CREATE TABLE Venda (
+      id int NOT NULL AUTO_INCREMENT,
+      dataVenda date,
+      precoTotal decimal(5,2),
+      statusPagamento int,
+      statusEntrega int,
+      idUsuario int,
+      idFormaPagamento int,
+      PRIMARY KEY (id),
+      FOREIGN KEY (idUsuario) REFERENCES Usuario(id),
+      FOREIGN KEY (idFormaPagamento) REFERENCES FormaPagamento(id)
+     );
+
+CREATE TABLE ProdutoVenda (
+      id int NOT NULL AUTO_INCREMENT,
+      idProduto int,
+      idVenda int,
+      quantidade int,
+      PRIMARY KEY (id),
+      FOREIGN KEY (idProduto) REFERENCES Produto(id),
+      FOREIGN KEY (idVenda) REFERENCES Venda(id)
+     );

@@ -7,6 +7,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 
+import { PaymentMethod } from './PaymentMethod';
 import { User } from './User';
 
 @Entity('Venda')
@@ -15,7 +16,7 @@ class Order {
   id: number;
 
   @CreateDateColumn()
-  dataNasc: Date;
+  dataVenda: Date;
 
   @Column('decimal', { precision: 5, scale: 2 })
   precoTotal: number;
@@ -30,8 +31,9 @@ class Order {
   @JoinColumn({ name: 'idUsuario' })
   usuario: User;
 
-  @Column()
-  idFormaPagamento: number;
+  @ManyToOne(() => PaymentMethod)
+  @JoinColumn({ name: 'idFormaPagamento' })
+  formaPagamento: PaymentMethod;
 }
 
 export { Order };
