@@ -8,7 +8,7 @@ CREATE TABLE Usuario (
       genero varchar(15),
       tipoConta int,
       PRIMARY KEY (id)
-     )
+     );
 
 CREATE TABLE Endereco (
       id int NOT NULL AUTO_INCREMENT,
@@ -22,7 +22,7 @@ CREATE TABLE Endereco (
       idUsuario int,
       PRIMARY KEY (id),
       FOREIGN KEY (idUsuario) REFERENCES Usuario(id)
-	   )
+	   );
 
 CREATE TABLE Telefone (
       id int NOT NULL AUTO_INCREMENT,
@@ -33,4 +33,25 @@ CREATE TABLE Telefone (
       idUsuario int,
       PRIMARY KEY (id),
       FOREIGN KEY (idUsuario) REFERENCES Usuario(id)
-	   )
+	   );
+
+CREATE TABLE Categoria (
+      id int NOT NULL AUTO_INCREMENT,
+      nome varchar(50),
+      descricao text,
+      PRIMARY KEY (id)
+	   );
+
+CREATE TABLE Produto (
+      id int NOT NULL AUTO_INCREMENT,
+      nome varchar(50),
+      descricao text,
+      marca varchar(25),
+      tamanho varchar(4),
+      estilo varchar(25),
+      cores varchar(25),
+      preco decimal(5,2),
+      idCategoria int,
+      PRIMARY KEY (id),
+      FOREIGN KEY (idCategoria) REFERENCES Categoria(id)
+     );
