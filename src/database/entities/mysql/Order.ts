@@ -27,9 +27,15 @@ class Order {
   @Column()
   statusEntrega: number;
 
+  @Column()
+  idUsuario: number;
+
   @ManyToOne(() => User)
   @JoinColumn({ name: 'idUsuario' })
   usuario: User;
+
+  @Column()
+  idFormaPagamento: number;
 
   @ManyToOne(() => PaymentMethod)
   @JoinColumn({ name: 'idFormaPagamento' })
