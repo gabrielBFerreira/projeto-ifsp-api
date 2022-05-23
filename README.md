@@ -1,6 +1,6 @@
 # Projeto IFSP (API)
 API do projeto para pós-graduação no IFSP Itapetininga, 1º sem. 2022
-Desenvolvido com TypeScript, Express, TypeORM, Docker, MySQL, MongoDB...
+Desenvolvido com TypeScript, Express, TypeORM, Docker, MySQL, MongoDB, Swagger...
 # Requisitos
 - Docker v20.10.x^ e Docker-Compose v1.28.x^ (para rodar direto no container)
 - Node.js v16.10.x^ (para rodar pelo Terminal)
@@ -10,3 +10,5 @@ Para rodar localmente com o Docker, copiar o arquivo **.env.example** para **.en
 Para rodar posteriormente sem o Docker, executar **yarn** para instalar as dependências (apenas uma vez) e **yarn dev** para iniciar a API.
 # Para compilar o projeto
 Executar **yarn build** para gerar uma versão compilada da API, e **yarn start** para iniciá-la.
+# Para acessar a documentação
+Ao iniciar a API, acessar a rota raiz pelo navegador levará o desenvolvedor à documentação, criada no Swagger.

@@ -1,0 +1,395 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "## Documentação da API do E-commerce da boutique 'Donna Monique'\n",
+    "version": "1.0.0",
+    "title": "Donna Monique",
+    "contact": {
+      "email": "gabriel.brisolla@aluno.ifsp.edu.br"
+    }
+  },
+  "host": "",
+  "basePath": "/",
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": ["Usuários"],
+        "summary": "Lista os usuários cadastrados no banco.",
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "usuarios": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "format": "int32"
+                          },
+                          "nome": {
+                            "type": "string"
+                          },
+                          "email": {
+                            "type": "string"
+                          },
+                          "senha": {
+                            "type": "string"
+                          },
+                          "dataNasc": {
+                            "type": "string"
+                          },
+                          "sexo": {
+                            "type": "string"
+                          },
+                          "genero": {
+                            "type": "string"
+                          },
+                          "tipoConta": {
+                            "type": "integer",
+                            "format": "int32"
+                          },
+                          "enderecos": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer",
+                                  "format": "int32"
+                                },
+                                "rua": {
+                                  "type": "string"
+                                },
+                                "numero": {
+                                  "type": "string"
+                                },
+                                "complemento": {
+                                  "type": "string"
+                                },
+                                "bairro": {
+                                  "type": "string"
+                                },
+                                "cidade": {
+                                  "type": "string"
+                                },
+                                "uf": {
+                                  "type": "string"
+                                },
+                                "cep": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          },
+                          "telefones": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer",
+                                  "format": "int32"
+                                },
+                                "ddi": {
+                                  "type": "string"
+                                },
+                                "ddd": {
+                                  "type": "string"
+                                },
+                                "numero": {
+                                  "type": "string"
+                                },
+                                "tipoTelefone": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno."
+          }
+        }
+      }
+    },
+    "/products": {
+      "get": {
+        "tags": ["Produtos"],
+        "summary": "Lista os produtos cadastrados no banco.",
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "produtos": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "format": "int32"
+                          },
+                          "nome": {
+                            "type": "string"
+                          },
+                          "descricao": {
+                            "type": "string"
+                          },
+                          "marca": {
+                            "type": "string"
+                          },
+                          "tamanho": {
+                            "type": "string"
+                          },
+                          "estilo": {
+                            "type": "string"
+                          },
+                          "cores": {
+                            "type": "string"
+                          },
+                          "preco": {
+                            "type": "string"
+                          },
+                          "categoria": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer",
+                                "format": "int32"
+                              },
+                              "nome": {
+                                "type": "string"
+                              },
+                              "descricao": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno."
+          }
+        }
+      },
+      "post": {
+        "tags": ["Produtos"],
+        "summary": "Cadastra um produto no banco.",
+        "description": "Dados a serem enviados:<br>- Nome<br>- Descrição (um parágrafo sobre o produto)<br>- Marca<br>- Tamanho (PP, P, M, G, GG...)<br>- Estilo (listrado, liso, manchado...)<br>- Cores (separar por vírgula)<br>- Preço (em R$; formato: 0.00)<br>- ID da categoria",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "type": "string",
+                    "example": "Vestido Longo"
+                  },
+                  "descricao": {
+                    "type": "string",
+                    "example": "Vestido longo para ocasiões formais."
+                  },
+                  "marca": {
+                    "type": "string",
+                    "example": "Donna Monique"
+                  },
+                  "tamanho": {
+                    "type": "string",
+                    "example": "M"
+                  },
+                  "estilo": {
+                    "type": "string",
+                    "example": "Liso"
+                  },
+                  "cores": {
+                    "type": "string",
+                    "example": "Verde musgo, verde claro"
+                  },
+                  "preco": {
+                    "type": "number",
+                    "example": 179.99
+                  },
+                  "idCategoria": {
+                    "type": "integer",
+                    "example": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "produto": {
+                      "type": "object",
+                      "properties": {
+                        "nome": {
+                          "type": "string",
+                          "example": "Vestido Longo"
+                        },
+                        "descricao": {
+                          "type": "string",
+                          "example": "Vestido longo para ocasiões formais."
+                        },
+                        "marca": {
+                          "type": "string",
+                          "example": "Donna Monique"
+                        },
+                        "tamanho": {
+                          "type": "string",
+                          "example": "M"
+                        },
+                        "estilo": {
+                          "type": "string",
+                          "example": "Liso"
+                        },
+                        "cores": {
+                          "type": "string",
+                          "example": "Verde musgo, verde claro"
+                        },
+                        "preco": {
+                          "type": "number",
+                          "example": 179.99
+                        },
+                        "idCategoria": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "id": {
+                          "type": "integer",
+                          "example": 36
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description":"Erro interno."
+          }
+        }
+      }
+    },
+    "orders": {
+      "post": {
+        "tags":["Vendas"],
+        "summary":"Cadastra uma venda no banco.",
+        "description":"Dados a serem enviados:<br>- Preço total (em R$; formato: 0.00; calculado no front)<br>- ID do usuário (cliente)<br>- ID da forma de pagamento",
+        "requestBody":{
+          "content":{
+            "application/json":{
+              "schema":{
+                "type":"object",
+                "properties":{
+                  "precoTotal": {
+                    "type": "number",
+                    "example": 249.98
+                  },
+                  "idUsuario": {
+                    "type": "integer",
+                    "example": 83
+                  },
+                  "idFormaPagamento": {
+                    "type": "integer",
+                    "example": 2
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses":{
+          "200":{
+            "description":"Sucesso",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "type":"object",
+                  "properties":{
+                    "venda": {
+                      "type": "object",
+                      "properties": {
+                        "dataVenda": {
+                          "type": "string",
+                          "example": "2022-05-23T00:00:00.000Z"
+                        },
+                        "precoTotal": {
+                          "type": "number",
+                          "example": 249.98
+                        },
+                        "statusPagamento": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": 1
+                        },
+                        "statusEntrega": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": 1
+                        },
+                        "idUsuario": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": 83
+                        },
+                        "idFormaPagamento": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": 2
+                        },
+                        "id": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": 127
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description":"Erro interno."
+          }
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Veja mais sobre o Swagger",
+    "url": "http://swagger.io"
+  }
+}

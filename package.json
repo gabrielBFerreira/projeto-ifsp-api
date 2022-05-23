@@ -28,7 +28,7 @@
     "mongodb": "^4.5.0",
     "mysql": "^2.18.1",
     "reflect-metadata": "^0.1.13",
-    "swagger-ui-express": "^4.3.0",
+    "swagger-ui-express": "^4.4.0",
     "typeorm": "^0.3.6"
   },
   "devDependencies": {
