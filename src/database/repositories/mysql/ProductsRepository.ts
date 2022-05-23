@@ -3,6 +3,17 @@ import { Repository } from 'typeorm';
 import { mysqlConnection } from '../../configs/mysql';
 import { Product } from '../../entities/mysql/Product';
 
+interface ICreateProduct {
+  nome: string;
+  descricao: string;
+  marca: string;
+  tamanho: string;
+  estilo: string;
+  cores: string;
+  preco: number;
+  idCategoria: number;
+}
+
 class ProductsRepository {
   private repository: Repository<Product>;
 
@@ -16,6 +27,12 @@ class ProductsRepository {
     });
 
     return { products };
+  }
+
+  async createProduct(data: ICreateProduct): Promise<{ product: Product }> {
+    const product = await this.repository.save(data);
+
+    return { product };
   }
 }
 

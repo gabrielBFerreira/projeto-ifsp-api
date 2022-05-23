@@ -34,6 +34,9 @@ class Product {
   @Column('decimal', { precision: 5, scale: 2 })
   preco: number;
 
+  @Column()
+  idCategoria: number;
+
   @ManyToOne(() => Category)
   @JoinColumn({ name: 'idCategoria' })
   categoria: Category;

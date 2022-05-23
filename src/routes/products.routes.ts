@@ -7,5 +7,6 @@ const productsRouter = Router();
 const productController = new ProductController();
 
 productsRouter.get('/', productController.index);
+productsRouter.post('/', productController.create);
 
 export { productsRouter };
