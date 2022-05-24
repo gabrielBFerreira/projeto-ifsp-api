@@ -4,16 +4,17 @@ import { CreateOrderService } from '../services/CreateOrderService';
 
 export class OrderController {
   public async create(req: Request, res: Response): Promise<Response> {
-    const { precoTotal, idUsuario, idFormaPagamento } = req.body;
+    const { precoTotal, idUsuario, idFormaPagamento, produtos } = req.body;
 
     const createOrderService = new CreateOrderService();
 
-    const { venda } = await createOrderService.run({
+    const { venda, produtosVenda } = await createOrderService.run({
       precoTotal,
       idUsuario,
       idFormaPagamento,
+      produtos,
     });
 
-    return res.json({ venda });
+    return res.json({ venda, produtosVenda });
   }
 }

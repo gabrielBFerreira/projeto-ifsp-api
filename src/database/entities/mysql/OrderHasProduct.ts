@@ -14,9 +14,15 @@ class OrderHasProduct {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column()
+  idProduto: number;
+
   @ManyToOne(() => Product)
   @JoinColumn({ name: 'idProduto' })
   produto: Product;
+
+  @Column()
+  idVenda: number;
 
   @ManyToOne(() => Order)
   @JoinColumn({ name: 'idVenda' })
