@@ -34,6 +34,9 @@ class Address {
   @Column('varchar', { length: 10 })
   cep: string;
 
+  @Column()
+  idUsuario: number;
+
   @ManyToOne(() => User)
   @JoinColumn({ name: 'idUsuario' })
   usuario: User;

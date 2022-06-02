@@ -324,6 +324,22 @@
                   "idFormaPagamento": {
                     "type": "integer",
                     "example": 2
+                  },
+                  "produtos": {
+                    "type":"array",
+                    "items": {
+                      "type":"object",
+                      "properties":{
+                        "idProduto":{
+                          "type":"integer",
+                          "example":14
+                        },
+                        "quantidade":{
+                          "type":"integer",
+                          "example":3
+                        }
+                      }
+                    }
                   }
                 }
               }
@@ -373,6 +389,30 @@
                           "type": "integer",
                           "format": "int32",
                           "example": 127
+                        }
+                      }
+                    },
+                    "produtosVenda": {
+                      "type":"array",
+                      "items": {
+                        "type":"object",
+                        "properties":{
+                          "idProduto":{
+                            "type":"integer",
+                            "example":14
+                          },
+                          "idVenda":{
+                            "type":"integer",
+                            "example":127
+                          },
+                          "quantidade":{
+                            "type":"integer",
+                            "example":3
+                          },
+                          "id":{
+                            "type":"integer",
+                            "example":1482
+                          }
                         }
                       }
                     }

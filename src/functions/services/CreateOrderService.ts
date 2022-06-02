@@ -41,9 +41,8 @@ export class CreateOrderService {
     const productsPromise = produtos.map(async (product) => {
       const { orderProduct } =
         await orderHasProductsRepository.createOrderProduct({
-          idProduto: product.idProduto,
+          ...product,
           idVenda: order.id,
-          quantidade: product.quantidade,
         });
 
       return orderProduct;
