@@ -19,8 +19,8 @@ interface IFindUser {
   email?: string;
 }
 
-class UsersRepository {
-  private repository: Repository<User>;
+class RefreshTokensRepository {
+  private repository: Repository<RefreshToken>;
 
   constructor() {
     this.repository = mysqlConnection.getRepository(User);
