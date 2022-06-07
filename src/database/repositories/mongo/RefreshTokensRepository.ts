@@ -20,7 +20,7 @@ class RefreshTokensRepository {
     idUsuario,
     dataExpiracao,
   }: ICreateRefreshToken): Promise<{ refreshToken: RefreshToken }> {
-    await this.repository.delete(idUsuario);
+    await this.repository.delete({ idUsuario });
 
     const refreshTokenObject = {
       token: uuid(),
