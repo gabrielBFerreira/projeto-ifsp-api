@@ -1,7 +1,7 @@
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 
-import { authenticationConfig } from '../../database/configs/authentication';
+import { authenticationConfig } from '../../configs/authentication';
 import { User } from '../../database/entities/mysql/User';
 import { RefreshTokensRepository } from '../../database/repositories/mongo/RefreshTokensRepository';
 import { UsersRepository } from '../../database/repositories/mysql/UsersRepository';
