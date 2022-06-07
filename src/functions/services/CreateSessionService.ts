@@ -1,5 +1,6 @@
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
+import { injectable } from 'tsyringe';
 
 import { authenticationConfig } from '../../configs/authentication';
 import { User } from '../../database/entities/mysql/User';
@@ -18,6 +19,7 @@ interface IResponse {
   refreshToken: string;
 }
 
+@injectable()
 export class CreateSessionService {
   public async run({ email, senha }: IRequest): Promise<IResponse> {
     if (!email || !senha) throw new ErrorHandler(400, 'Parâmetros inválidos.');
@@ -29,7 +31,7 @@ export class CreateSessionService {
 
     if (!user) throw new ErrorHandler(404, 'Usuário não encontrado.');
 
-    const rightPassword = compare(senha, user.senha);
+    const rightPassword = await compare(senha, user.senha);
 
     if (!rightPassword)
       throw new ErrorHandler(401, 'Usuário ou senha errados.');
