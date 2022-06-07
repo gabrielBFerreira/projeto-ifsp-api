@@ -1,3 +1,4 @@
+import { errors as paramsValidation } from 'celebrate';
 import cors from 'cors';
 import 'reflect-metadata';
 import express, { Request, Response, NextFunction } from 'express';
@@ -23,6 +24,7 @@ const swaggerOptions = {
 app.use(routes);
 app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerFile, swaggerOptions));
 
+app.use(paramsValidation());
 app.use((error: Error, req: Request, res: Response, _: NextFunction) => {
   if (error instanceof ErrorHandler) {
     return res.status(error.code).json({

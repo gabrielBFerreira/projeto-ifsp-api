@@ -41,7 +41,7 @@ export class CreateSessionService {
 
     const { secret, expiresIn } = jwtConfig;
 
-    const token = sign({}, secret, {
+    const token = sign({ accessLevel: user.tipoConta }, secret, {
       subject: user.id.toString(),
       expiresIn: `${expiresIn}d`,
     });
