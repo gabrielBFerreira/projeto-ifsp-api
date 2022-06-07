@@ -3,6 +3,7 @@ import { sign } from 'jsonwebtoken';
 
 import { authenticationConfig } from '../../database/configs/authentication';
 import { User } from '../../database/entities/mysql/User';
+import { RefreshTokensRepository } from '../../database/repositories/mongo/RefreshTokensRepository';
 import { UsersRepository } from '../../database/repositories/mysql/UsersRepository';
 import { ErrorHandler } from '../../utils/ErrorHandler';
 
@@ -22,6 +23,7 @@ export class CreateSessionService {
     if (!email || !senha) throw new ErrorHandler(400, 'Parâmetros inválidos.');
 
     const usersRepository = new UsersRepository();
+    const refreshTokensRepository = new RefreshTokensRepository();
 
     const { user } = await usersRepository.findUser({ email });
 
@@ -32,7 +34,12 @@ export class CreateSessionService {
     if (!rightPassword)
       throw new ErrorHandler(401, 'Usuário ou senha errados.');
 
-    const { secret, expiresIn } = authenticationConfig.user.jwt;
+    const jwtConfig =
+      user.tipoConta === 1
+        ? authenticationConfig.user.jwt
+        : authenticationConfig.client.jwt;
+
+    const { secret, expiresIn } = jwtConfig;
 
     const token = sign({}, secret, {
       subject: user.id.toString(),
@@ -41,13 +48,13 @@ export class CreateSessionService {
 
     const today = new Date();
 
-    const refreshToken = await this.refreshTokensRepository.createToken({
-      userId: user.id,
-      expire: new Date(
-        today.setDate(today.getDate() + authenticationConfig.user.jwt.expiresIn)
+    const { refreshToken } = await refreshTokensRepository.createRefreshToken({
+      idUsuario: user.id,
+      dataExpiracao: new Date(
+        today.setDate(today.getDate() + jwtConfig.expiresIn)
       ),
     });
 
-    return { usuario: user, token, refreshToken };
+    return { usuario: user, token, refreshToken: refreshToken.token };
   }
 }

@@ -5,10 +5,7 @@ const rootDir = process.env.NODE_ENV === 'dev' ? './src' : './dist';
 export const mongoConnection = new DataSource({
   name: 'mongodb',
   type: 'mongodb',
-  url: `mongodb://mongo/${process.env.MONGO_DATABASE}`,
-  username: process.env.MONGO_INITDB_ROOT_USERNAME,
-  password: process.env.MONGO_INITDB_ROOT_PASSWORD,
-  database: process.env.MONGO_DATABASE,
+  url: `mongodb://${process.env.MONGO_INITDB_ROOT_USERNAME}:${process.env.MONGO_INITDB_ROOT_PASSWORD}@mongo/${process.env.MONGO_DATABASE}?authSource=admin`,
   useUnifiedTopology: true,
   synchronize: false,
   logging: true,

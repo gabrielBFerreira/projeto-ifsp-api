@@ -1,18 +1,27 @@
-import { Column, Entity, ObjectID, ObjectIdColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ObjectID,
+  ObjectIdColumn,
+} from 'typeorm';
 
-@Entity('TokenLogin')
-class Metadata {
+@Entity('RefreshToken')
+class RefreshToken {
   @ObjectIdColumn()
   _id: ObjectID;
 
   @Column()
-  nome: string;
+  idUsuario: number;
 
   @Column()
-  descricao: string;
+  token: string;
 
   @Column()
-  url: string;
+  dataExpiracao: Date;
+
+  @CreateDateColumn()
+  dataCriacao: Date;
 }
 
-export { Metadata };
+export { RefreshToken };
