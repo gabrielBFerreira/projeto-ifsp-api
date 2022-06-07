@@ -22,8 +22,6 @@ interface IResponse {
 @injectable()
 export class CreateSessionService {
   public async run({ email, senha }: IRequest): Promise<IResponse> {
-    if (!email || !senha) throw new ErrorHandler(400, 'Parâmetros inválidos.');
-
     const usersRepository = new UsersRepository();
     const refreshTokensRepository = new RefreshTokensRepository();
 

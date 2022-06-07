@@ -1,6 +1,8 @@
+import 'reflect-metadata';
+import 'express-async-errors';
+
 import { errors as paramsValidation } from 'celebrate';
 import cors from 'cors';
-import 'reflect-metadata';
 import express, { Request, Response, NextFunction } from 'express';
 import swaggerUi from 'swagger-ui-express';
 
@@ -32,6 +34,8 @@ app.use((error: Error, req: Request, res: Response, _: NextFunction) => {
       message: error.message,
     });
   }
+
+  console.log(error);
 
   return res.status(500).json({
     code: 500,
