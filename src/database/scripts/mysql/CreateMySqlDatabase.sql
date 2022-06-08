@@ -86,3 +86,5 @@ CREATE TABLE ProdutoVenda (
       FOREIGN KEY (idProduto) REFERENCES Produto(id),
       FOREIGN KEY (idVenda) REFERENCES Venda(id)
      );
+
+ALTER TABLE Usuario MODIFY COLUMN senha varchar(100);

@@ -1,3 +1,5 @@
+import { hash } from 'bcryptjs';
+
 import { Address } from '../../database/entities/mysql/Address';
 import { Phone } from '../../database/entities/mysql/Phone';
 import { User } from '../../database/entities/mysql/User';
@@ -59,7 +61,7 @@ export class CreateUserService {
     const { user } = await usersRepository.createUser({
       nome,
       email,
-      senha,
+      senha: await hash(senha, 8),
       dataNasc,
       sexo,
       genero,

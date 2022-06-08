@@ -14,7 +14,7 @@ class User {
   @Column('varchar', { length: 35 })
   email: string;
 
-  @Column('varchar', { length: 20 })
+  @Column('varchar', { length: 100 })
   senha: string;
 
   @Column()
