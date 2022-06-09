@@ -1,8 +1,11 @@
 import { hash } from 'bcryptjs';
+import { sign } from 'jsonwebtoken';
 
+import { authenticationConfig } from '../../configs/authentication';
 import { Address } from '../../database/entities/mysql/Address';
 import { Phone } from '../../database/entities/mysql/Phone';
 import { User } from '../../database/entities/mysql/User';
+import { RefreshTokensRepository } from '../../database/repositories/mongo/RefreshTokensRepository';
 import { AddressesRepository } from '../../database/repositories/mysql/AddressesRepository';
 import { PhonesRepository } from '../../database/repositories/mysql/PhonesRepository';
 import { UsersRepository } from '../../database/repositories/mysql/UsersRepository';
@@ -40,6 +43,8 @@ interface IResponse {
   usuario: User;
   enderecosUsuario: Address[];
   telefonesUsuario: Phone[];
+  token: string;
+  refreshToken: string;
 }
 
 export class CreateUserService {
@@ -57,6 +62,7 @@ export class CreateUserService {
     const usersRepository = new UsersRepository();
     const addressesRepository = new AddressesRepository();
     const phonesRepository = new PhonesRepository();
+    const refreshTokensRepository = new RefreshTokensRepository();
 
     const { user } = await usersRepository.createUser({
       nome,
@@ -90,10 +96,33 @@ export class CreateUserService {
 
     const userPhones = await Promise.all(phonesPromise);
 
+    const jwtConfig =
+      user.tipoConta === 1
+        ? authenticationConfig.admin.jwt
+        : authenticationConfig.client.jwt;
+
+    const { secret, expiresIn } = jwtConfig;
+
+    const token = sign({ accessLevel: user.tipoConta }, secret, {
+      subject: user.id.toString(),
+      expiresIn: `${expiresIn}d`,
+    });
+
+    const today = new Date();
+
+    const { refreshToken } = await refreshTokensRepository.createRefreshToken({
+      idUsuario: user.id,
+      dataExpiracao: new Date(
+        today.setDate(today.getDate() + jwtConfig.expiresIn)
+      ),
+    });
+
     return {
       usuario: user,
       enderecosUsuario: userAddressses,
       telefonesUsuario: userPhones,
+      token,
+      refreshToken: refreshToken.token,
     };
   }
 }

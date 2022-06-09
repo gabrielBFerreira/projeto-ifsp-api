@@ -36,7 +36,7 @@ export class CreateSessionService {
 
     const jwtConfig =
       user.tipoConta === 1
-        ? authenticationConfig.user.jwt
+        ? authenticationConfig.admin.jwt
         : authenticationConfig.client.jwt;
 
     const { secret, expiresIn } = jwtConfig;
