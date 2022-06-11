@@ -33,6 +33,12 @@ class RefreshTokensRepository {
 
     return { refreshToken };
   }
+
+  async findByToken(token): Promise<{ refreshToken: RefreshToken }> {
+    const refreshToken = await this.repository.findOne(token);
+
+    return { refreshToken };
+  }
 }
 
 export { RefreshTokensRepository };
