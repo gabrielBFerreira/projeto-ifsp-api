@@ -27,7 +27,7 @@ export class UserController {
 
     const createUserService = new CreateUserService();
 
-    const { usuario, enderecosUsuario, telefonesUsuario } =
+    const { usuario, enderecosUsuario, telefonesUsuario, token, refreshToken } =
       await createUserService.run({
         nome,
         email,
@@ -40,6 +40,12 @@ export class UserController {
         telefones,
       });
 
-    return res.json({ usuario, enderecosUsuario, telefonesUsuario });
+    return res.json({
+      usuario,
+      enderecosUsuario,
+      telefonesUsuario,
+      token,
+      refreshToken,
+    });
   }
 }
