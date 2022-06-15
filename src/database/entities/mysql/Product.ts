@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
+import { Picture } from '../mongo/Picture';
 import { Category } from './Category';
 
 @Entity('Produto')
@@ -40,6 +41,8 @@ class Product {
   @ManyToOne(() => Category)
   @JoinColumn({ name: 'idCategoria' })
   categoria: Category;
+
+  figuras: Picture[];
 }
 
 export { Product };

@@ -29,6 +29,15 @@ class ProductsRepository {
     return { products };
   }
 
+  async findProductById(id: number): Promise<{ product: Product }> {
+    const product = await this.repository.findOneOrFail({
+      where: { id },
+      relations: ['categoria'],
+    });
+
+    return { product };
+  }
+
   async createProduct(data: ICreateProduct): Promise<{ product: Product }> {
     const product = await this.repository.save(data);
 

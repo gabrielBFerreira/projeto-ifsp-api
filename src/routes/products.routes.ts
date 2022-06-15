@@ -15,6 +15,7 @@ const productController = new ProductController();
 const pictureController = new PictureController();
 
 productsRouter.get('/', productController.index);
+productsRouter.get('/:idProduto', productController.show);
 productsRouter.post('/', isAuthenticated, isAdmin, productController.create);
 productsRouter.post(
   '/:idProduto/pictures',

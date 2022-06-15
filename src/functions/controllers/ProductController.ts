@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 
 import { CreateProductService } from '../services/CreateProductService';
 import { ListProductsService } from '../services/ListProductsService';
+import { ShowProductService } from '../services/ShowProductService';
 
 export class ProductController {
   public async index(req: Request, res: Response): Promise<Response> {
@@ -10,6 +11,16 @@ export class ProductController {
     const { produtos } = await listProductsService.run();
 
     return res.json({ produtos });
+  }
+
+  public async show(req: Request, res: Response): Promise<Response> {
+    const { idProduto } = req.params;
+
+    const showProductService = new ShowProductService();
+
+    const produto = await showProductService.run(idProduto);
+
+    return res.json({ produto });
   }
 
   public async create(req: Request, res: Response): Promise<Response> {

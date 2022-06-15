@@ -24,8 +24,8 @@ class PicturesRepository {
     return { productPicture };
   }
 
-  async findByProductId(idProduto): Promise<{ pictures: Picture[] }> {
-    const pictures = await this.repository.find(idProduto);
+  async findByProductId(idProduto: number): Promise<{ pictures: Picture[] }> {
+    const pictures = await this.repository.find({ where: { idProduto } });
 
     return { pictures };
   }
