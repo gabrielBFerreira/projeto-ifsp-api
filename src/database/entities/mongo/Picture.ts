@@ -5,12 +5,6 @@ class Picture {
   @ObjectIdColumn()
   _id: ObjectID;
 
-  // @Column()
-  // nome: string;
-
-  @Column()
-  descricao: string;
-
   @Column()
   caminho: string;
 

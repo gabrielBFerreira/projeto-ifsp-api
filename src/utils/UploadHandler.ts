@@ -1,6 +1,7 @@
 import fs from 'fs';
 import mime from 'mime';
 import path from 'path';
+import sharp from 'sharp';
 
 import { uploadConfig } from '../configs/upload';
 import { ErrorHandler } from './ErrorHandler';
