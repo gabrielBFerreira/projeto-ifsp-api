@@ -1,3 +1,4 @@
+import { S3 } from 'aws-sdk';
 import fs from 'fs';
 import mime from 'mime';
 import path from 'path';
@@ -12,6 +13,16 @@ interface ICompressImage {
 }
 
 export class UploadHandler {
+  private s3Client: S3;
+
+  constructor() {
+    this.s3Client = new S3({
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+      region: 'sa-east-1',
+    });
+  }
+
   public async compressImage({ filename, size }: ICompressImage): Promise<{
     path: string;
     filename: string;
@@ -65,14 +76,25 @@ export class UploadHandler {
 
   public async saveFile(filename: string): Promise<string> {
     const originalPath = path.resolve(uploadConfig.tmpFolder, filename);
-    const uploadPath = path.resolve(uploadConfig.uploadsFolder, filename);
 
     const ContentType = mime.getType(originalPath);
 
     if (!ContentType) throw new ErrorHandler(400, 'Formato inválido');
 
-    await fs.promises.rename(originalPath, uploadPath);
+    const file = await fs.promises.readFile(originalPath);
 
-    return filename;
+    await this.s3Client
+      .putObject({
+        Bucket: 'projetoifsp',
+        Key: filename,
+        ACL: 'public-read',
+        Body: file,
+        ContentType,
+      })
+      .promise();
+
+    await fs.promises.unlink(originalPath);
+
+    return `https://projetoifsp.s3.sa-east-1.amazonaws.com/${filename}`;
   }
 }
