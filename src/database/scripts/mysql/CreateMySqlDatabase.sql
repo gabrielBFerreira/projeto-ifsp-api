@@ -87,4 +87,24 @@ CREATE TABLE ProdutoVenda (
       FOREIGN KEY (idVenda) REFERENCES Venda(id)
      );
 
+CREATE TABLE Fornecedor (
+      id int NOT NULL AUTO_INCREMENT,
+      nome varchar(50),
+      endereco varchar(50),
+      contato varchar(50),
+      PRIMARY KEY (id)
+    );
+
+CREATE TABLE Estoque (
+      id int NOT NULL AUTO_INCREMENT,
+      operacao int,
+      quantidade int,
+      dataHora datetime,
+      idProduto int,
+      idFornecedor int,
+      PRIMARY KEY (id),
+      FOREIGN KEY (idProduto) REFERENCES Produto(id),
+      FOREIGN KEY (idFornecedor) REFERENCES Fornecedor(id)
+    );
+
 ALTER TABLE Usuario MODIFY COLUMN senha varchar(100);

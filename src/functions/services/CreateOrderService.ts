@@ -2,6 +2,7 @@ import { Order } from '../../database/entities/mysql/Order';
 import { OrderHasProduct } from '../../database/entities/mysql/OrderHasProduct';
 import { OrderHasProductsRepository } from '../../database/repositories/mysql/OrderHasProductsRepository';
 import { OrdersRepository } from '../../database/repositories/mysql/OrdersRepository';
+import { StockRepository } from '../../database/repositories/mysql/StockRepository';
 
 interface IOrderProduct {
   idProduto: number;
@@ -28,6 +29,7 @@ export class CreateOrderService {
   }: IRequest): Promise<IResponse> {
     const ordersRepository = new OrdersRepository();
     const orderHasProductsRepository = new OrderHasProductsRepository();
+    const stockRepository = new StockRepository();
 
     const { order } = await ordersRepository.createOrder({
       dataVenda: new Date(),
@@ -44,6 +46,13 @@ export class CreateOrderService {
           ...product,
           idVenda: order.id,
         });
+
+      await stockRepository.createStockEntry({
+        operacao: 2,
+        quantidade: product.quantidade,
+        dataHora: new Date(),
+        idProduto: product.idProduto,
+      });
 
       return orderProduct;
     });
