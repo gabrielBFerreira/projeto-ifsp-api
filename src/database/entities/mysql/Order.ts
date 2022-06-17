@@ -5,8 +5,10 @@ import {
   CreateDateColumn,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 
+import { OrderHasProduct } from './OrderHasProduct';
 import { PaymentMethod } from './PaymentMethod';
 import { User } from './User';
 
@@ -40,6 +42,9 @@ class Order {
   @ManyToOne(() => PaymentMethod)
   @JoinColumn({ name: 'idFormaPagamento' })
   formaPagamento: PaymentMethod;
+
+  @OneToMany(() => OrderHasProduct, (orderProduct) => orderProduct.venda)
+  produtosVenda: OrderHasProduct[];
 }
 
 export { Order };

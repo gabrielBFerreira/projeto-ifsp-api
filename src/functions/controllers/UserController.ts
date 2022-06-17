@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 
 import { CreateUserService } from '../services/CreateUserService';
 import { ListUsersService } from '../services/ListUsersService';
+import { ShowUserProfileService } from '../services/ShowUserProfileService';
 
 export class UserController {
   public async index(req: Request, res: Response): Promise<Response> {
@@ -10,6 +11,16 @@ export class UserController {
     const { usuarios } = await listUsersService.run();
 
     return res.json({ usuarios });
+  }
+
+  public async show(req: Request, res: Response): Promise<Response> {
+    const { idUsuario } = req.params;
+
+    const showUserProfileService = new ShowUserProfileService();
+
+    const usuario = await showUserProfileService.run(idUsuario);
+
+    return res.json({ usuario });
   }
 
   public async create(req: Request, res: Response): Promise<Response> {

@@ -24,6 +24,15 @@ class OrdersRepository {
 
     return { order };
   }
+
+  async findByUserId(idUsuario: number): Promise<{ orders: Order[] }> {
+    const orders = await this.repository.find({
+      where: { idUsuario },
+      relations: ['produtosVenda', 'produtosVenda.produto'],
+    });
+
+    return { orders };
+  }
 }
 
 export { OrdersRepository };

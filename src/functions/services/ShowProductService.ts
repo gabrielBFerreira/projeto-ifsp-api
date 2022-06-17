@@ -20,7 +20,7 @@ export class ShowProductService {
       Number(idProduto)
     );
 
-    if (!product) throw new ErrorHandler(404, 'Product not found');
+    if (!product) throw new ErrorHandler(404, 'Produto não encontrado.');
 
     const { pictures } = await picturesRepository.findByProductId(
       Number(idProduto)
