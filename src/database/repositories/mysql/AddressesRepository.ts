@@ -14,6 +14,17 @@ interface ICreateAddress {
   idUsuario: number;
 }
 
+interface IUpdateAddress {
+  id: number;
+  rua?: string;
+  numero?: string;
+  complemento?: string;
+  bairro?: string;
+  cidade?: string;
+  uf?: string;
+  cep?: string;
+}
+
 class AddressesRepository {
   private repository: Repository<Address>;
 
@@ -22,6 +33,12 @@ class AddressesRepository {
   }
 
   async createAddress(data: ICreateAddress): Promise<{ userAddress: Address }> {
+    const userAddress = await this.repository.save(data);
+
+    return { userAddress };
+  }
+
+  async updateAddress(data: IUpdateAddress): Promise<{ userAddress: Address }> {
     const userAddress = await this.repository.save(data);
 
     return { userAddress };

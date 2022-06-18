@@ -14,6 +14,10 @@ interface ICreateProduct {
   idCategoria: number;
 }
 
+interface IListProducts {
+  idCategoria?: number;
+}
+
 class ProductsRepository {
   private repository: Repository<Product>;
 
@@ -21,8 +25,9 @@ class ProductsRepository {
     this.repository = mysqlConnection.getRepository(Product);
   }
 
-  async listProducts(): Promise<{ products: Product[] }> {
+  async listProducts(data: IListProducts): Promise<{ products: Product[] }> {
     const products = await this.repository.find({
+      where: { ...data },
       relations: ['categoria'],
     });
 

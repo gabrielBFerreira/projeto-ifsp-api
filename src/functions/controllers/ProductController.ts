@@ -4,11 +4,17 @@ import { CreateProductService } from '../services/CreateProductService';
 import { ListProductsService } from '../services/ListProductsService';
 import { ShowProductService } from '../services/ShowProductService';
 
+interface IQueryParams {
+  idCategoria: string;
+}
+
 export class ProductController {
   public async index(req: Request, res: Response): Promise<Response> {
+    const { idCategoria } = req.query as unknown as IQueryParams;
+
     const listProductsService = new ListProductsService();
 
-    const { produtos } = await listProductsService.run();
+    const { produtos } = await listProductsService.run({ idCategoria });
 
     return res.json({ produtos });
   }

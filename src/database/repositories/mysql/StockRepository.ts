@@ -24,6 +24,14 @@ class StockRepository {
     return { entry };
   }
 
+  async listStockEntries(): Promise<{ entries: Stock[] }> {
+    const entries = await this.repository.find({
+      relations: ['produto'],
+    });
+
+    return { entries };
+  }
+
   async findEntriesByProductId(
     idProduto: number
   ): Promise<{ productEntries: Stock[] }> {
