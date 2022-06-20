@@ -24,7 +24,7 @@ export class ProductController {
 
     const showProductService = new ShowProductService();
 
-    const produto = await showProductService.run(idProduto);
+    const { produto } = await showProductService.run(idProduto);
 
     return res.json({ produto });
   }

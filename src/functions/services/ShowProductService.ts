@@ -6,8 +6,7 @@ import { StockRepository } from '../../database/repositories/mysql/StockReposito
 import { ErrorHandler } from '../../utils/ErrorHandler';
 
 interface IResponse {
-  informacoes: Product;
-  figuras: Picture[];
+  produto: Product;
 }
 
 export class ShowProductService {
@@ -26,6 +25,8 @@ export class ShowProductService {
       Number(idProduto)
     );
 
+    product.figuras = pictures;
+
     const { productEntries: stockEntries } =
       await stockRepository.findEntriesByProductId(Number(idProduto));
 
@@ -39,6 +40,6 @@ export class ShowProductService {
       quantidade: productTotalQuantity,
     };
 
-    return { informacoes: productWithQuantity, figuras: pictures };
+    return { produto: productWithQuantity };
   }
 }
