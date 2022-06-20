@@ -1,4 +1,3 @@
-import { Picture } from '../../database/entities/mongo/Picture';
 import { Product } from '../../database/entities/mysql/Product';
 import { PicturesRepository } from '../../database/repositories/mongo/PicturesRepository';
 import { ProductsRepository } from '../../database/repositories/mysql/ProductsRepository';
