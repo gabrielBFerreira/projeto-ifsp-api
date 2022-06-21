@@ -152,6 +152,175 @@
         }
       }
     },
+    "/sessions": {
+      "post": {
+        "tags": ["Login"],
+        "summary": "Realiza o login.",
+        "description": "- Dados a serem enviados:<br>- E-mail<br>- Senha",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "jucahb@gmail.com"
+                  },
+                  "senha": {
+                    "type": "string",
+                    "example": "Vk5@!0f81$4"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "usuario": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": "3"
+                        },
+                        "nome": {
+                          "type": "string",
+                          "example": "Juca H. B"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "jucahb@gmail.com"
+                        },
+                        "senha": {
+                          "type": "string",
+                          "example": "$2a$08$z52Atf9RyVTrPsdpDiyE2e9nuBWVeSNA6PMCtLpFsOBTtv5av8MOy"
+                        },
+                        "dataNasc": {
+                          "type": "string",
+                          "example": "1992-02-18T00:00:00.000Z"
+                        },
+                        "sexo": {
+                          "type": "string",
+                          "example": "M"
+                        },
+                        "genero": {
+                          "type": "string",
+                          "example": "Masculino"
+                        },
+                        "tipoConta": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": "2"
+                        },
+                        "enderecos": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer",
+                                "format": "int32",
+                                "example": "1"
+                              },
+                              "rua": {
+                                "type": "string",
+                                "example": "Av. NTI"
+                              },
+                              "numero": {
+                                "type": "string",
+                                "example": "142B"
+                              },
+                              "complemento": {
+                                "type": "string",
+                                "example": "Edifício Vale dos Anjos"
+                              },
+                              "bairro": {
+                                "type": "string",
+                                "example": "Jardim São Marcos"
+                              },
+                              "cidade": {
+                                "type": "string",
+                                "example": "Piraju"
+                              },
+                              "uf": {
+                                "type": "string",
+                                "example": "SP"
+                              },
+                              "cep": {
+                                "type": "string",
+                                "example": "18731679"
+                              },
+                              "idUsuario": {
+                                "type": "integer",
+                                "example": "3"
+                              }
+                            }
+                          }
+                        },
+                        "telefones": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer",
+                                "format": "int32",
+                                "example": "3"
+                              },
+                              "ddi": {
+                                "type": "string",
+                                "example": "+55"
+                              },
+                              "ddd": {
+                                "type": "string",
+                                "example": "15"
+                              },
+                              "numero": {
+                                "type": "string",
+                                "example": "988665323"
+                              },
+                              "tipoTelefone": {
+                                "type": "string",
+                                "example": "Celular"
+                              },
+                              "idUsuario": {
+                                "type": "integer",
+                                "format": "int32",
+                                "example": "3"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NMZXZlbCI6MiwiaWF0IjoxNjU1NTM2MDg4LCJleHAiOjE2NTgxMjgwODgsInN1YiI6IjUifQ._VpRN5sAoGhDrGdVj9slzacL17nKg6J-AaKv9Y_BVvg"
+                    },
+                    "refreshToken": {
+                      "type": "string",
+                      "example": "cf5a378f-fa4f-470b-bc86-ec5070e61a5e"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description":"Erro interno."
+          }
+        }
+      }
+    },
     "/products": {
       "get": {
         "tags": ["Produtos"],
