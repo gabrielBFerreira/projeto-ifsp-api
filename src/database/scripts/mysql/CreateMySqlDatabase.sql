@@ -108,3 +108,17 @@ CREATE TABLE Estoque (
     );
 
 ALTER TABLE Usuario MODIFY COLUMN senha varchar(100);
+
+INSERT INTO Categoria (
+  nome, descricao
+) VALUES (
+  'Vestidos', 'Roupas que cobrem do ombro ou busto às pernas com uma saia, podendo ou não ter decotes.');
+
+INSERT INTO FormaPagamento
+(`nome`,
+`descricao`)
+VALUES
+('Boleto',
+'Boleto bancário com vencimento de três dias úteis após geração.');
+
+INSERT INTO Fornecedor (`id`, `nome`, `endereco`, `contato`) VALUES ('1', 'Fornecedor Teste', 'Av. NTI', 'teste@gmail.com');
