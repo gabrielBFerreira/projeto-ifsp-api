@@ -15,11 +15,14 @@ class OrderHasProduct {
   id: number;
 
   @Column()
-  statusEntrega: number;
+  idProduto: number;
 
   @ManyToOne(() => Product)
   @JoinColumn({ name: 'idProduto' })
   produto: Product;
+
+  @Column()
+  idVenda: number;
 
   @ManyToOne(() => Order)
   @JoinColumn({ name: 'idVenda' })

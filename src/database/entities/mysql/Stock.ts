@@ -24,9 +24,15 @@ class Stock {
   @CreateDateColumn()
   dataHora: Date;
 
+  @Column()
+  idProduto: number;
+
   @ManyToOne(() => Product)
   @JoinColumn({ name: 'idProduto' })
   produto: Product;
+
+  @Column()
+  idFornecedor: number;
 
   @ManyToOne(() => Provider)
   @JoinColumn({ name: 'idFornecedor' })

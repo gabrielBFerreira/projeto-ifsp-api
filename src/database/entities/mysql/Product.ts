@@ -1,4 +1,13 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+
+import { Picture } from '../mongo/Picture';
+import { Category } from './Category';
 
 @Entity('Produto')
 class Product {
@@ -28,6 +37,12 @@ class Product {
 
   @Column()
   idCategoria: number;
+
+  @ManyToOne(() => Category)
+  @JoinColumn({ name: 'idCategoria' })
+  categoria: Category;
+
+  figuras: Picture[];
 }
 
 export { Product };

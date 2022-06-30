@@ -25,6 +25,9 @@ class Phone {
   @Column('varchar', { length: 25 })
   tipoTelefone: string;
 
+  @Column()
+  idUsuario: number;
+
   @ManyToOne(() => User)
   @JoinColumn({ name: 'idUsuario' })
   usuario: User;

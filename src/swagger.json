@@ -1,0 +1,2099 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "## Documentação da API do E-commerce da boutique 'Donna Monique'\n",
+    "version": "1.0.0",
+    "title": "Donna Monique",
+    "contact": {
+      "email": "gabriel.brisolla@aluno.ifsp.edu.br"
+    }
+  },
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": ["Usuários"],
+        "summary": "Lista os usuários cadastrados no banco. Obs.: OBRIGATÓRIO autenticação de administrador com token",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "tipoConta",
+            "in": "query",
+            "description": "Tipo de usuário (1: Adm, 2: Cliente comum; filtro opcional)",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "usuarios": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": "1"
+                          },
+                          "nome": {
+                            "type": "string",
+                            "example": "Jonas H. B."
+                          },
+                          "email": {
+                            "type": "string",
+                            "example": "jonashb@gmail.com"
+                          },
+                          "senha": {
+                            "type": "string",
+                            "example": "MVc0Tk40QjNGNE0wVSQ"
+                          },
+                          "dataNasc": {
+                            "type": "string",
+                            "example": "1999-07-14T00:00:00.000Z"
+                          },
+                          "sexo": {
+                            "type": "string",
+                            "example": "M"
+                          },
+                          "genero": {
+                            "type": "string",
+                            "example": "Masculino"
+                          },
+                          "tipoConta": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": "1"
+                          },
+                          "enderecos": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer",
+                                  "format": "int32",
+                                  "example": "1"
+                                },
+                                "rua": {
+                                  "type": "string",
+                                  "example": "Av. NTI"
+                                },
+                                "numero": {
+                                  "type": "string",
+                                  "example": "142B"
+                                },
+                                "complemento": {
+                                  "type": "string",
+                                  "example": "Edifício Vale dos Anjos"
+                                },
+                                "bairro": {
+                                  "type": "string",
+                                  "example": "Jardim São Marcos"
+                                },
+                                "cidade": {
+                                  "type": "string",
+                                  "example": "Piraju"
+                                },
+                                "uf": {
+                                  "type": "string",
+                                  "example": "SP"
+                                },
+                                "cep": {
+                                  "type": "string",
+                                  "example": "18731679"
+                                },
+                                "idUsuario": {
+                                  "type": "integer",
+                                  "example": "1"
+                                }
+                              }
+                            }
+                          },
+                          "telefones": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer",
+                                  "format": "int32",
+                                  "example": "1"
+                                },
+                                "ddi": {
+                                  "type": "string",
+                                  "example": "+55"
+                                },
+                                "ddd": {
+                                  "type": "string",
+                                  "example": "15"
+                                },
+                                "numero": {
+                                  "type": "string",
+                                  "example": "987654321"
+                                },
+                                "tipoTelefone": {
+                                  "type": "string",
+                                  "example": "Celular"
+                                },
+                                "idUsuario": {
+                                  "type": "integer",
+                                  "example": "1"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno."
+          }
+        }
+      },
+      "post": {
+        "tags": ["Usuários"],
+        "summary": "Cadastra um usuário no banco.",
+        "description": "- Dados a serem enviados:<br>- Nome<br>- E-mail<br>- Senha (será criptografada no backend, antes de chegar no banco de dados)<br>- Data de nascimento (formato: AAAA-MM-DD)<br>- Sexo (1 caractere)<br>- Gênero<br>- Tipo da Conta (1: Administrador; 2: Cliente comum)<br>- Objeto endereço (com rua, número, complemento, bairro, cidade, UF e CEP)<br>- Objeto telefone (com DDI, DDD, número e tipo de telefone)",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "type": "string",
+                    "example": "Adenor Leonardo Bacchi"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "titetecnico@cbf.com.br"
+                  },
+                  "senha": {
+                    "type": "string",
+                    "example": "V1N1Jr+1@"
+                  },
+                  "dataNasc": {
+                    "type": "string",
+                    "example": "1961-05-25"
+                  },
+                  "sexo": {
+                    "type": "string",
+                    "example": "M"
+                  },
+                  "genero": {
+                    "type": "string",
+                    "example": "Masculino"
+                  },
+                  "tipoConta": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "enderecos": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "rua": {
+                          "type": "string",
+                          "example": "Av. NTI"
+                        },
+                        "numero": {
+                          "type": "string",
+                          "example": "743"
+                        },
+                        "complemento": {
+                          "type": "string",
+                          "example": "Ap. 18"
+                        },
+                        "bairro": {
+                          "type": "string",
+                          "example": "Vila Galinha"
+                        },
+                        "cidade": {
+                          "type": "string",
+                          "example": "Cerejeiras"
+                        },
+                        "uf": {
+                          "type": "string",
+                          "example": "SP"
+                        },
+                        "cep": {
+                          "type": "string",
+                          "example": "18329178"
+                        }
+                      }
+                    }
+                  },
+                  "telefones": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "ddi": {
+                          "type": "string",
+                          "example": "+55"
+                        },
+                        "ddd": {
+                          "type": "string",
+                          "example": "15"
+                        },
+                        "numero": {
+                          "type": "string",
+                          "example": "988665323"
+                        },
+                        "tipoTelefone": {
+                          "type": "string",
+                          "example": "Celular"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "usuario": {
+                      "type": "object",
+                      "properties": {
+                        "nome": {
+                          "type": "string",
+                          "example": "Adenor Leonardo Bacchi"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "titetecnico@cbf.com.br"
+                        },
+                        "senha": {
+                          "type": "string",
+                          "example": "$2a$08$u7gZLmNf4N/gpMj91cjLROi4xY21KjDCPz7Ky99JajGDTf30NUJ6a"
+                        },
+                        "dataNasc": {
+                          "type": "string",
+                          "example": "1961-05-25"
+                        },
+                        "sexo": {
+                          "type": "string",
+                          "example": "M"
+                        },
+                        "genero": {
+                          "type": "string",
+                          "example": "Masculino"
+                        },
+                        "tipoConta": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": "1"
+                        },
+                        "id": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": "2"
+                        }
+                      }
+                    },
+                    "enderecosUsuario": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "rua": {
+                            "type": "string",
+                            "example": "Av. NTI"
+                          },
+                          "numero": {
+                            "type": "string",
+                            "example": "743"
+                          },
+                          "complemento": {
+                            "type": "string",
+                            "example": "Ap. 18"
+                          },
+                          "bairro": {
+                            "type": "string",
+                            "example": "Vila Galinha"
+                          },
+                          "cidade": {
+                            "type": "string",
+                            "example": "Cerejeiras"
+                          },
+                          "uf": {
+                            "type": "string",
+                            "example": "SP"
+                          },
+                          "cep": {
+                            "type": "string",
+                            "example": "18329178"
+                          },
+                          "idUsuario": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": "2"
+                          },
+                          "id": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": "2"
+                          }
+                        }
+                      }
+                    },
+                    "telefonesUsuario": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "ddi": {
+                            "type": "string",
+                            "example": "+55"
+                          },
+                          "ddd": {
+                            "type": "string",
+                            "example": "15"
+                          },
+                          "numero": {
+                            "type": "string",
+                            "example": "988665323"
+                          },
+                          "tipoTelefone": {
+                            "type": "string",
+                            "example": "Celular"
+                          },
+                          "idUsuario": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": "2"
+                          },
+                          "id": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": "2"
+                          }
+                        }
+                      }
+                    },
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NMZXZlbCI6MSwiaWF0IjoxNjU1ODY5NTI4LCJleHAiOjE2NTcxNjU1MjgsInN1YiI6IjIifQ.u0aOhKqXMmN8IkNNLoCUb-f56U5snmh3RtToE5yotYc"
+                    },
+                    "refreshToken": {
+                      "type": "string",
+                      "example": "1ab1008a-543e-4e14-92db-569f4761bc3e"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description":"Erro interno."
+          }
+        }
+      },
+      "put": {
+        "tags": ["Usuários"],
+        "summary": "Atualiza um usuário no banco. Obrigatória autenticação com token",
+        "description": "- Dados a serem enviados:<br>- Os mesmos da rota de cadastro, exceto tipo de conta<br>- No entanto, cada endereço e telefone informado deverá receber o ID previamente cadastrado para saber qual será atualizado<br>- Observe que não é necessário mandar todos os dados do usuário, apenas os que deseja substituir<br>- Sendo assim, o retorno da requisição também só traz os dados atualizados",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "type": "string",
+                    "example": "Adenor Leonardo Bacchi"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "titetecnico@cbf.com.br"
+                  },
+                  "senha": {
+                    "type": "string",
+                    "example": "V1N1Jr+1@"
+                  },
+                  "dataNasc": {
+                    "type": "string",
+                    "example": "1961-05-25"
+                  },
+                  "sexo": {
+                    "type": "string",
+                    "example": "M"
+                  },
+                  "genero": {
+                    "type": "string",
+                    "example": "Masculino"
+                  },
+                  "enderecos": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": "2"
+                        },
+                        "rua": {
+                          "type": "string",
+                          "example": "Av. NTI"
+                        },
+                        "numero": {
+                          "type": "string",
+                          "example": "743"
+                        },
+                        "complemento": {
+                          "type": "string",
+                          "example": "Ap. 18"
+                        },
+                        "bairro": {
+                          "type": "string",
+                          "example": "Vila Galinha"
+                        },
+                        "cidade": {
+                          "type": "string",
+                          "example": "Cerejeiras"
+                        },
+                        "uf": {
+                          "type": "string",
+                          "example": "SP"
+                        },
+                        "cep": {
+                          "type": "string",
+                          "example": "18329178"
+                        }
+                      }
+                    }
+                  },
+                  "telefones": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": "2"
+                        },
+                        "ddi": {
+                          "type": "string",
+                          "example": "+55"
+                        },
+                        "ddd": {
+                          "type": "string",
+                          "example": "15"
+                        },
+                        "numero": {
+                          "type": "string",
+                          "example": "988665323"
+                        },
+                        "tipoTelefone": {
+                          "type": "string",
+                          "example": "Celular"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "usuario": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": "2"
+                        },
+                        "nome": {
+                          "type": "string",
+                          "example": "Adenor Leonardo Bacchi"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "titetecnico@cbf.com.br"
+                        },
+                        "senha": {
+                          "type": "string",
+                          "example": "$2a$08$u7gZLmNf4N/gpMj91cjLROi4xY21KjDCPz7Ky99JajGDTf30NUJ6a"
+                        },
+                        "dataNasc": {
+                          "type": "string",
+                          "example": "1961-05-25"
+                        },
+                        "sexo": {
+                          "type": "string",
+                          "example": "M"
+                        },
+                        "genero": {
+                          "type": "string",
+                          "example": "Masculino"
+                        }
+                      }
+                    },
+                    "enderecosUsuario": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": "2"
+                          },
+                          "rua": {
+                            "type": "string",
+                            "example": "Av. NTI"
+                          },
+                          "numero": {
+                            "type": "string",
+                            "example": "743"
+                          },
+                          "complemento": {
+                            "type": "string",
+                            "example": "Ap. 18"
+                          },
+                          "bairro": {
+                            "type": "string",
+                            "example": "Vila Galinha"
+                          },
+                          "cidade": {
+                            "type": "string",
+                            "example": "Cerejeiras"
+                          },
+                          "uf": {
+                            "type": "string",
+                            "example": "SP"
+                          },
+                          "cep": {
+                            "type": "string",
+                            "example": "18329178"
+                          },
+                          "idUsuario": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": "2"
+                          }
+                        }
+                      }
+                    },
+                    "telefonesUsuario": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": "2"
+                          },
+                          "ddi": {
+                            "type": "string",
+                            "example": "+55"
+                          },
+                          "ddd": {
+                            "type": "string",
+                            "example": "15"
+                          },
+                          "numero": {
+                            "type": "string",
+                            "example": "988665323"
+                          },
+                          "tipoTelefone": {
+                            "type": "string",
+                            "example": "Celular"
+                          },
+                          "idUsuario": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": "2"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description":"Erro interno."
+          }
+        }
+      }
+    },
+    "/users/{idUsuario}": {
+      "get": {
+        "tags": ["Usuários"],
+        "summary": "Lista os dados de um usuário cadastrado no banco. Obs.: OBRIGATÓRIO autenticação com token",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "idUsuario",
+            "in": "path",
+            "description": "ID do usuário (obrigatório)",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": "1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "usuario": {
+                      "type": "object",
+                      "properties": {
+                        "informacoes": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "format": "int32",
+                              "example": "1"
+                            },
+                            "nome": {
+                              "type": "string",
+                              "example": "Adilson Joia da Cruz"
+                            },
+                            "email": {
+                              "type": "string",
+                              "example": "adsjc@gmail.com"
+                            },
+                            "senha": {
+                              "type": "string",
+                              "example": "$2a$08$A98dHW4jdbZWDZsP3ZGsfeQCOjnTz27OiZtF9f5nQWXKh29TUf./K"
+                            },
+                            "dataNasc": {
+                              "type": "string",
+                              "example": "1992-02-18T00:00:00.000Z"
+                            },
+                            "sexo": {
+                              "type": "string",
+                              "example": "M"
+                            },
+                            "genero": {
+                              "type": "string",
+                              "example": "Masculino"
+                            },
+                            "tipoConta": {
+                              "type": "integer",
+                              "format": "int32",
+                              "example": "2"
+                            },
+                            "enderecos": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "integer",
+                                    "format": "int32",
+                                    "example": "1"
+                                  },
+                                  "rua": {
+                                    "type": "string",
+                                    "example": "Av. NTI"
+                                  },
+                                  "numero": {
+                                    "type": "string",
+                                    "example": "743"
+                                  },
+                                  "complemento": {
+                                    "type": "string",
+                                    "example": "Ap. 18"
+                                  },
+                                  "bairro": {
+                                    "type": "string",
+                                    "example": "Vila Galinha"
+                                  },
+                                  "cidade": {
+                                    "type": "string",
+                                    "example": "Cerejeiras"
+                                  },
+                                  "uf": {
+                                    "type": "string",
+                                    "example": "SP"
+                                  },
+                                  "cep": {
+                                    "type": "string",
+                                    "example": "18329178"
+                                  },
+                                  "idUsuario": {
+                                    "type": "integer",
+                                    "format": "int32",
+                                    "example": "1"
+                                  }
+                                }
+                              }
+                            },
+                            "telefones": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "integer",
+                                    "format": "int32",
+                                    "example": "1"
+                                  },
+                                  "ddi": {
+                                    "type": "string",
+                                    "example": "+55"
+                                  },
+                                  "ddd": {
+                                    "type": "string",
+                                    "example": "15"
+                                  },
+                                  "numero": {
+                                    "type": "string",
+                                    "example": "988665323"
+                                  },
+                                  "tipoTelefone": {
+                                    "type": "string",
+                                    "example": "Celular"
+                                  },
+                                  "idUsuario": {
+                                    "type": "integer",
+                                    "format": "int32",
+                                    "example": "1"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "pedidos": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer",
+                                "format": "int32",
+                                "example": "3"
+                              },
+                              "dataVenda": {
+                                "type": "string",
+                                "example": "2022-06-22T00:00:00.000Z"
+                              },
+                              "precoTotal": {
+                                "type": "string",
+                                "example": "12.00"
+                              },
+                              "statusPagamento": {
+                                "type": "integer",
+                                "format": "int32",
+                                "example": "1"
+                              },
+                              "statusEntrega": {
+                                "type": "integer",
+                                "format": "int32",
+                                "example": "1"
+                              },
+                              "idUsuario": {
+                                "type": "integer",
+                                "format": "int32",
+                                "example": "1"
+                              },
+                              "idFormaPagamento": {
+                                "type": "integer",
+                                "format": "int32",
+                                "example": "1"
+                              },
+                              "produtosVenda": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "integer",
+                                      "format": "int32",
+                                      "example": "3"
+                                    },
+                                    "idProduto": {
+                                      "type": "integer",
+                                      "format": "int32",
+                                      "example": "1"
+                                    },
+                                    "idVenda": {
+                                      "type": "integer",
+                                      "format": "int32",
+                                      "example": "3"
+                                    },
+                                    "quantidade": {
+                                      "type": "integer",
+                                      "format": "int32",
+                                      "example": "13"
+                                    },
+                                    "produto": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "integer",
+                                          "format": "int32",
+                                          "example": "1"
+                                        },
+                                        "nome": {
+                                          "type": "string",
+                                          "example": "Vestido Longo"
+                                        },
+                                        "descricao": {
+                                          "type": "string",
+                                          "example": "Vestido longo para ocasiões formais."
+                                        },
+                                        "marca": {
+                                          "type": "string",
+                                          "example": "Donna Monique"
+                                        },
+                                        "tamanho": {
+                                          "type": "string",
+                                          "example": "M"
+                                        },
+                                        "estilo": {
+                                          "type": "string",
+                                          "example": "Liso"
+                                        },
+                                        "cores": {
+                                          "type": "string",
+                                          "example": "Verde musgo, verde claro"
+                                        },
+                                        "preco": {
+                                          "type": "string",
+                                          "example": "174.99"
+                                        },
+                                        "idCategoria": {
+                                          "type": "integer",
+                                          "format": "int32",
+                                          "example": "1"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno."
+          }
+        }
+      }
+    },
+    "/sessions": {
+      "post": {
+        "tags": ["Login"],
+        "summary": "Realiza o login.",
+        "description": "- Dados a serem enviados:<br>- E-mail<br>- Senha",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "jucahb@gmail.com"
+                  },
+                  "senha": {
+                    "type": "string",
+                    "example": "Vk5@!0f81$4"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "usuario": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": "3"
+                        },
+                        "nome": {
+                          "type": "string",
+                          "example": "Juca H. B"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "jucahb@gmail.com"
+                        },
+                        "senha": {
+                          "type": "string",
+                          "example": "$2a$08$z52Atf9RyVTrPsdpDiyE2e9nuBWVeSNA6PMCtLpFsOBTtv5av8MOy"
+                        },
+                        "dataNasc": {
+                          "type": "string",
+                          "example": "1992-02-18T00:00:00.000Z"
+                        },
+                        "sexo": {
+                          "type": "string",
+                          "example": "M"
+                        },
+                        "genero": {
+                          "type": "string",
+                          "example": "Masculino"
+                        },
+                        "tipoConta": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": "2"
+                        },
+                        "enderecos": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer",
+                                "format": "int32",
+                                "example": "1"
+                              },
+                              "rua": {
+                                "type": "string",
+                                "example": "Av. NTI"
+                              },
+                              "numero": {
+                                "type": "string",
+                                "example": "142B"
+                              },
+                              "complemento": {
+                                "type": "string",
+                                "example": "Edifício Vale dos Anjos"
+                              },
+                              "bairro": {
+                                "type": "string",
+                                "example": "Jardim São Marcos"
+                              },
+                              "cidade": {
+                                "type": "string",
+                                "example": "Piraju"
+                              },
+                              "uf": {
+                                "type": "string",
+                                "example": "SP"
+                              },
+                              "cep": {
+                                "type": "string",
+                                "example": "18731679"
+                              },
+                              "idUsuario": {
+                                "type": "integer",
+                                "example": "3"
+                              }
+                            }
+                          }
+                        },
+                        "telefones": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer",
+                                "format": "int32",
+                                "example": "3"
+                              },
+                              "ddi": {
+                                "type": "string",
+                                "example": "+55"
+                              },
+                              "ddd": {
+                                "type": "string",
+                                "example": "15"
+                              },
+                              "numero": {
+                                "type": "string",
+                                "example": "988665323"
+                              },
+                              "tipoTelefone": {
+                                "type": "string",
+                                "example": "Celular"
+                              },
+                              "idUsuario": {
+                                "type": "integer",
+                                "format": "int32",
+                                "example": "3"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NMZXZlbCI6MiwiaWF0IjoxNjU1NTM2MDg4LCJleHAiOjE2NTgxMjgwODgsInN1YiI6IjUifQ._VpRN5sAoGhDrGdVj9slzacL17nKg6J-AaKv9Y_BVvg"
+                    },
+                    "refreshToken": {
+                      "type": "string",
+                      "example": "cf5a378f-fa4f-470b-bc86-ec5070e61a5e"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description":"Erro interno."
+          }
+        }
+      }
+    },
+    "/refresh-tokens": {
+      "post": {
+        "tags": ["Refresh Tokens"],
+        "summary": "Recria o token de autenticação para um usuário.",
+        "description": "- Dados a serem enviados:<br>- Refresh token atual",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "currentRefreshToken": {
+                    "type": "string",
+                    "example": "b08h4fa1-a7ee-4b76-b3e6-c3c5e8e191l8"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NMZXZlbCI6MiwiaWF0IjoxNjU1NTM2MDg4LCJleHAiOjE2NTgxMjgwODgsInN1YiI6IjUifQ._VpRN5sAoGhDrGdVj9slzacL17nKg6J-AaKv9Y_BVvg"
+                    },
+                    "refreshToken": {
+                      "type": "string",
+                      "example": "cf5a378f-fa4f-470b-bc86-ec5070e61a5e"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description":"Erro interno."
+          }
+        }
+      }
+    },
+    "/products": {
+      "get": {
+        "tags": ["Produtos"],
+        "summary": "Lista os produtos cadastrados no banco, com detalhes de sua categoria e suas imagens relacionadas.",
+        "parameters": [
+          {
+            "name": "idCategoria",
+            "in": "query",
+            "description": "ID da categoria do produto (filtro opcional)",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "produtos": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": "1"
+                          },
+                          "nome": {
+                            "type": "string",
+                            "example": "Vestido Maiden CH"
+                          },
+                          "descricao": {
+                            "type": "string",
+                            "example": "Vestido longo"
+                          },
+                          "marca": {
+                            "type": "string",
+                            "example": "Carolina Herrera"
+                          },
+                          "tamanho": {
+                            "type": "string",
+                            "example": "M"
+                          },
+                          "estilo": {
+                            "type": "string",
+                            "example": "Liso"
+                          },
+                          "cores": {
+                            "type": "string",
+                            "example": "Vermelho"
+                          },
+                          "preco": {
+                            "type": "string",
+                            "example": "189.99"
+                          },
+                          "idCategoria": {
+                            "type": "integer",
+                            "example": "1"
+                          },
+                          "categoria": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer",
+                                "format": "int32",
+                                "example": "1"
+                              },
+                              "nome": {
+                                "type": "string",
+                                "example": "Vestidos"
+                              },
+                              "descricao": {
+                                "type": "string",
+                                "example": "Roupas longas"
+                              }
+                            }
+                          },
+                          "figuras": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "_id": {
+                                  "type": "string",
+                                  "example": "62a980f277c64c0ccf47d2cd"
+                                },
+                                "caminho": {
+                                  "type": "string",
+                                  "example": "1655275762382-produto1.jpg"
+                                },
+                                "idProduto": {
+                                  "type": "integer",
+                                  "format": "int32",
+                                  "example": "1"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno."
+          }
+        }
+      },
+      "post": {
+        "tags": ["Produtos"],
+        "summary": "Cadastra um produto no banco.  Obrigatória autenticação com token de administrador",
+        "description": "- Dados a serem enviados:<br>- Nome<br>- Descrição (um parágrafo sobre o produto)<br>- Marca<br>- Tamanho (PP, P, M, G, GG...)<br>- Estilo (listrado, liso, manchado...)<br>- Cores (separar por vírgula)<br>- Preço (em R$; formato: 0.00)<br>- ID da categoria\n- Token de autenticação de ADMINISTRADOR obrigatório",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "type": "string",
+                    "example": "Vestido Longo"
+                  },
+                  "descricao": {
+                    "type": "string",
+                    "example": "Vestido longo para ocasiões formais."
+                  },
+                  "marca": {
+                    "type": "string",
+                    "example": "Donna Monique"
+                  },
+                  "tamanho": {
+                    "type": "string",
+                    "example": "M"
+                  },
+                  "estilo": {
+                    "type": "string",
+                    "example": "Liso"
+                  },
+                  "cores": {
+                    "type": "string",
+                    "example": "Verde musgo, verde claro"
+                  },
+                  "preco": {
+                    "type": "number",
+                    "example": 179.99
+                  },
+                  "idCategoria": {
+                    "type": "integer",
+                    "example": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "produto": {
+                      "type": "object",
+                      "properties": {
+                        "nome": {
+                          "type": "string",
+                          "example": "Vestido Longo"
+                        },
+                        "descricao": {
+                          "type": "string",
+                          "example": "Vestido longo para ocasiões formais."
+                        },
+                        "marca": {
+                          "type": "string",
+                          "example": "Donna Monique"
+                        },
+                        "tamanho": {
+                          "type": "string",
+                          "example": "M"
+                        },
+                        "estilo": {
+                          "type": "string",
+                          "example": "Liso"
+                        },
+                        "cores": {
+                          "type": "string",
+                          "example": "Verde musgo, verde claro"
+                        },
+                        "preco": {
+                          "type": "number",
+                          "example": 179.99
+                        },
+                        "idCategoria": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "id": {
+                          "type": "integer",
+                          "example": 36
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description":"Erro interno."
+          }
+        }
+      }
+    },
+    "/products/{idProduto}": {
+      "get": {
+        "tags": ["Produtos"],
+        "summary": "Detalha dados de um produto, com detalhes de sua categoria e suas imagens relacionadas.",
+        "parameters": [
+          {
+            "name": "idProduto",
+            "in": "path",
+            "description": "ID do produto (obrigatório)",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": "1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "produto": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": "1"
+                        },
+                        "nome": {
+                          "type": "string",
+                          "example": "Vestido Maiden CH"
+                        },
+                        "descricao": {
+                          "type": "string",
+                          "example": "Vestido longo"
+                        },
+                        "marca": {
+                          "type": "string",
+                          "example": "Carolina Herrera"
+                        },
+                        "tamanho": {
+                          "type": "string",
+                          "example": "M"
+                        },
+                        "estilo": {
+                          "type": "string",
+                          "example": "Liso"
+                        },
+                        "cores": {
+                          "type": "string",
+                          "example": "Vermelho"
+                        },
+                        "preco": {
+                          "type": "string",
+                          "example": "189.99"
+                        },
+                        "idCategoria": {
+                          "type": "integer",
+                          "example": "1"
+                        },
+                        "categoria": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "format": "int32",
+                              "example": "1"
+                            },
+                            "nome": {
+                              "type": "string",
+                              "example": "Vestidos"
+                            },
+                            "descricao": {
+                              "type": "string",
+                              "example": "Roupas longas"
+                            }
+                          }
+                        },
+                        "figuras": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "_id": {
+                                "type": "string",
+                                "example": "62a980f277c64c0ccf47d2cd"
+                              },
+                              "caminho": {
+                                "type": "string",
+                                "example": "1655275762382-produto1.jpg"
+                              },
+                              "idProduto": {
+                                "type": "integer",
+                                "format": "int32",
+                                "example": "1"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno."
+          }
+        }
+      }
+    },
+    "/products/{idProduto}/pictures": {
+      "post": {
+        "tags": ["Produtos"],
+        "summary": "Adicionar uma imagem ao produto. Obrigatório token de administrador",
+        "description": "- Nome do campo que receberá a imagem é **figura**\n- Token de autenticação de ADMINISTRADOR obrigatório",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "figura": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                },
+                "example": {
+                  "figura": "foto_produto.jpg"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Invalid file format, just accept images."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
+      }
+    },
+    "/categories": {
+      "get": {
+        "tags": ["Categorias"],
+        "summary": "Lista as categorias de produtos cadastradas no banco.",
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "categorias": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": "1"
+                          },
+                          "nome": {
+                            "type": "string",
+                            "example": "Vestidos"
+                          },
+                          "descricao": {
+                            "type": "string",
+                            "example": "Roupas que cobrem do ombro ou busto às pernas com uma saia, podendo ou não ter decotes."
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno."
+          }
+        }
+      }
+    },
+    "/providers": {
+      "get": {
+        "tags": ["Fornecedores"],
+        "summary": "Lista os fornecedores de produtos cadastrados no banco. Obs.: OBRIGATÓRIO autenticação de administrador",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "fornecedores": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": "1"
+                          },
+                          "nome": {
+                            "type": "string",
+                            "example": "Vestidos da Rosa LTDA"
+                          },
+                          "endereco": {
+                            "type": "string",
+                            "example": "Av. Valério Paiva Filho, 762; Vl. Santa Cruz; Apiaí - SP"
+                          },
+                          "contato": {
+                            "type": "string",
+                            "example": "mariarosa@vestidosrosa.com.br"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno."
+          }
+        }
+      }
+    },
+    "/stock": {
+      "get": {
+        "tags": ["Estoque"],
+        "summary": "Lista produtos no estoque com suas respectivas quantidades; autenticação de admin obrigatória",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "estoque": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": "1"
+                          },
+                          "nome": {
+                            "type": "string",
+                            "example": "Vestido Longo"
+                          },
+                          "descricao": {
+                            "type": "string",
+                            "example": "Vestido longo para ocasiões formais."
+                          },
+                          "marca": {
+                            "type": "string",
+                            "example": "Donna Monique"
+                          },
+                          "tamanho": {
+                            "type": "string",
+                            "example": "M"
+                          },
+                          "estilo": {
+                            "type": "string",
+                            "example": "Liso"
+                          },
+                          "cores": {
+                            "type": "string",
+                            "example": "Verde musgo, verde claro"
+                          },
+                          "preco": {
+                            "type": "string",
+                            "example": "174.99"
+                          },
+                          "idCategoria": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": "1"
+                          },
+                          "categoria": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer",
+                                "format": "int32",
+                                "example": "1"
+                              },
+                              "nome": {
+                                "type": "string",
+                                "example": "Vestidos"
+                              },
+                              "descricao": {
+                                "type": "string",
+                                "example": "Roupas que cobrem do ombro ou busto às pernas com uma saia, podendo ou não ter decotes."
+                              }
+                            }
+                          },
+                          "quantidade": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": "12"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno."
+          }
+        }
+      }
+    },
+    "/stock/entries": {
+      "get": {
+        "tags": ["Estoque"],
+        "summary": "Lista histórico de entradas do estoque; autenticação de admin obrigatória",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "registros": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": "1"
+                          },
+                          "operacao": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": "2"
+                          },
+                          "quantidade": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": "13"
+                          },
+                          "dataHora": {
+                            "type": "string",
+                            "example": "2022-06-22T03:49:55.000Z"
+                          },
+                          "idProduto": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": "1"
+                          },
+                          "idFornecedor": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": "1"
+                          },
+                          "produto": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer",
+                                "format": "int32",
+                                "example": "1"
+                              },
+                              "nome": {
+                                "type": "string",
+                                "example": "Vestido Longo"
+                              },
+                              "descricao": {
+                                "type": "string",
+                                "example": "Vestido longo para ocasiões formais."
+                              },
+                              "marca": {
+                                "type": "string",
+                                "example": "Donna Monique"
+                              },
+                              "tamanho": {
+                                "type": "string",
+                                "example": "M"
+                              },
+                              "estilo": {
+                                "type": "string",
+                                "example": "Liso"
+                              },
+                              "cores": {
+                                "type": "string",
+                                "example": "Verde musgo, verde claro"
+                              },
+                              "preco": {
+                                "type": "string",
+                                "example": "174.99"
+                              },
+                              "idCategoria": {
+                                "type": "integer",
+                                "format": "int32",
+                                "example": "1"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno."
+          }
+        }
+      },
+      "post": {
+        "tags": ["Estoque"],
+        "summary": "Cadastra uma entrada/saída de produto no estoque.  Obrigatória autenticação com token de administrador",
+        "description": "- Dados a serem enviados:<br>- Operação (1: Entrada; 2: Saída)<br>- Quantidade<br>- ID do produto<br>- ID do fornecedor (opcional)\n- Token de autenticação de ADMINISTRADOR obrigatório",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "operacao": {
+                    "type": "integer",
+                    "example": "1"
+                  },
+                  "quantidade": {
+                    "type": "integer",
+                    "example": "12"
+                  },
+                  "idProduto": {
+                    "type": "integer",
+                    "example": "1"
+                  },
+                  "idFornecedor": {
+                    "type": "integer",
+                    "example": "1"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "produto": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": "1"
+                        },
+                        "nome": {
+                          "type": "string",
+                          "example": "Vestido Longo"
+                        },
+                        "descricao": {
+                          "type": "string",
+                          "example": "Vestido longo para ocasiões formais."
+                        },
+                        "marca": {
+                          "type": "string",
+                          "example": "Donna Monique"
+                        },
+                        "tamanho": {
+                          "type": "string",
+                          "example": "M"
+                        },
+                        "estilo": {
+                          "type": "string",
+                          "example": "Liso"
+                        },
+                        "cores": {
+                          "type": "string",
+                          "example": "Verde musgo, verde claro"
+                        },
+                        "preco": {
+                          "type": "string",
+                          "example": "174.99"
+                        },
+                        "idCategoria": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": "1"
+                        },
+                        "categoria": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "format": "int32",
+                              "example": "1"
+                            },
+                            "nome": {
+                              "type": "string",
+                              "example": "Vestidos"
+                            },
+                            "descricao": {
+                              "type": "string",
+                              "example": "Roupas que cobrem do ombro ou busto às pernas com uma saia, podendo ou não ter decotes."
+                            }
+                          }
+                        },
+                        "quantidade": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": "12"
+                        }
+                      }
+                    },
+                    "registro": {
+                      "type": "object",
+                      "properties": {
+                        "operacao": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": "1"
+                        },
+                        "quantidade": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": "2"
+                        },
+                        "dataHora": {
+                          "type": "string",
+                          "example": "2022-06-22T04:41:30.000Z"
+                        },
+                        "idProduto": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": "1"
+                        },
+                        "idFornecedor": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": "1"
+                        },
+                        "id": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": "3"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description":"Erro interno."
+          }
+        }
+      }
+    },
+    "/orders": {
+      "post": {
+        "tags":["Vendas"],
+        "summary":"Cadastra uma venda no banco. Obrigatória autenticação com token do cliente",
+        "description":"- Dados a serem enviados:<br>- Preço total (em R$; formato: 0.00; calculado no front)<br>- ID da forma de pagamento<br>- Lista de produtos com o ID e quantidade de cada um\n - É OBRIGATÓRIO mandar o token de autenticação nesta rota, o ID do usuário/cliente será extraído do token",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody":{
+          "content":{
+            "application/json":{
+              "schema":{
+                "type":"object",
+                "properties":{
+                  "precoTotal": {
+                    "type": "number",
+                    "example": 249.98
+                  },
+                  "idFormaPagamento": {
+                    "type": "integer",
+                    "example": 2
+                  },
+                  "produtos": {
+                    "type":"array",
+                    "items": {
+                      "type":"object",
+                      "properties":{
+                        "idProduto":{
+                          "type":"integer",
+                          "example":14
+                        },
+                        "quantidade":{
+                          "type":"integer",
+                          "example":3
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses":{
+          "200":{
+            "description":"Sucesso",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "type":"object",
+                  "properties":{
+                    "venda": {
+                      "type": "object",
+                      "properties": {
+                        "dataVenda": {
+                          "type": "string",
+                          "example": "2022-05-23T00:00:00.000Z"
+                        },
+                        "precoTotal": {
+                          "type": "number",
+                          "example": 249.98
+                        },
+                        "statusPagamento": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": 1
+                        },
+                        "statusEntrega": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": 1
+                        },
+                        "idUsuario": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": 83
+                        },
+                        "idFormaPagamento": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": 2
+                        },
+                        "id": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": 127
+                        }
+                      }
+                    },
+                    "produtosVenda": {
+                      "type":"array",
+                      "items": {
+                        "type":"object",
+                        "properties":{
+                          "idProduto":{
+                            "type":"integer",
+                            "example":14
+                          },
+                          "idVenda":{
+                            "type":"integer",
+                            "example":127
+                          },
+                          "quantidade":{
+                            "type":"integer",
+                            "example":3
+                          },
+                          "id":{
+                            "type":"integer",
+                            "example":1482
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description":"Erro interno."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Veja mais sobre o Swagger",
+    "url": "http://swagger.io"
+  }
+}
