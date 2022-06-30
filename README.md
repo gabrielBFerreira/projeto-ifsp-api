@@ -13,3 +13,4 @@ Para rodar posteriormente sem o Docker, executar **yarn** para instalar as depen
 Executar **yarn build** para gerar uma versão compilada da API, e **yarn start** para iniciá-la.
 # Para acessar a documentação
 Ao iniciar a API, acessar a rota raiz pelo navegador levará o desenvolvedor à documentação, criada no Swagger.
+Para quem usa Insomnia, está incluso um arquivo com as rotas e exemplos de objetos de envio e retorno na pasta **docs**.
