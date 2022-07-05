@@ -12,7 +12,7 @@ class Picture {
   idProduto: number;
 
   @Column()
-  idMetadado: number;
+  idMetadado: ObjectID;
 }
 
 export { Picture };
