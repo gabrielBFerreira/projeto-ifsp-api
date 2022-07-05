@@ -112,13 +112,17 @@ ALTER TABLE Usuario MODIFY COLUMN senha varchar(100);
 INSERT INTO Categoria (
   nome, descricao
 ) VALUES (
-  'Vestidos', 'Roupas que cobrem do ombro ou busto às pernas com uma saia, podendo ou não ter decotes.');
+  'Vestidos', 'Roupas que cobrem do ombro ou busto às pernas com uma saia, podendo ou não ter decotes.'), (
+  'Calças', 'Roupas que cobrem as pernas.'), (
+  'Camisetas', 'Roupas geralmente confortáveis que cobrem o busto.');
 
 INSERT INTO FormaPagamento
 (`nome`,
 `descricao`)
 VALUES
 ('Boleto',
-'Boleto bancário com vencimento de três dias úteis após geração.');
+'Boleto bancário com vencimento de três dias úteis após geração.'), ('Cartão de crédito',
+'Cartão de crédito de alguma bandeira válida.'), ('Cartão de débito',
+'Cartão de débito de alguma bandeira válida.');
 
 INSERT INTO Fornecedor (`id`, `nome`, `endereco`, `contato`) VALUES ('1', 'Fornecedor Teste', 'Av. NTI', 'teste@gmail.com');

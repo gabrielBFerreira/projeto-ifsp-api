@@ -1489,6 +1489,18 @@
         "summary": "Adicionar uma imagem ao produto. Obrigatório token de administrador",
         "description": "- Nome do campo que receberá a imagem é **figura**\n- Token de autenticação de ADMINISTRADOR obrigatório",
         "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "idProduto",
+            "in": "path",
+            "description": "ID do produto (obrigatório)",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": "1"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "multipart/form-data": {
